@@ -1,29 +1,53 @@
-<h1>Pay here!</h1>
+<div class="card mt-4">
+  <div class="card-body">
+    <h1 class="card-title mt-3">Pay here!</h1>
 
-<div>
-  <%= form_with url: "/", method: :post do |form| %>
-    <div>
-      <%= form.label :card_number, "Card number:" %>
-      <%= form.text_field :card_number, size: 16, :pattern => '\d{16}' %>
+    <div class="mt-4">
+      <%= form_with url: "/", method: :post do |form| %>
+        <div class="form-group">      
+          <%= form.label :amount, "Amount:" %>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <%= form.text_field :amount, :class => "form-control" %>
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= form.label :card_number, "Card number:" %>
+          <%= form.text_field :card_number, size: 16, :pattern => '\d{16}', :class => "form-control" %>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <%= form.label :expiration_month, "Expiration month:" %>
+              <%= select_month Date.today, { prefix: "expiration_year", discard_type: true }, { :class => "form-control" } %>
+            </div>
+            <div class="col">
+              <%= form.label :expiration_year, "Expiration year:" %>
+              <%= select_year Date.today, { prefix: "expiration_year", discard_type: true }, { :class => "form-control" } %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <%= form.label :security_code, "CVV:" %>
+              <%= form.text_field :security_code, size: 3, :pattern => '\d{3}', :class => "form-control" %>
+            </div>
+            <div class="col">
+              <%= form.label :pin, "PIN:" %>
+              <%= form.text_field :pin, size: 6, :pattern => '\d{6}', :class => "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group d-flex justify-content-end">
+          <%= form.submit "Pay", :class => "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-    <div>
-      <%= form.label :expiration_month, "Expiration month:" %>
-      <%= select_month Date.today, prefix: "expiration_month", discard_type: true %>
-    </div>
-    <div>
-      <%= form.label :expiration_year, "Expiration year:" %>
-      <%= select_year Date.today, prefix: "expiration_year", discard_type: true %>
-    </div>
-    <div>
-      <%= form.label :security_code, "CVV:" %>
-      <%= form.text_field :security_code, size: 3, :pattern => '\d{3}' %>
-    </div>
-    <div>
-      <%= form.label :pin, "PIN:" %>
-      <%= form.text_field :pin, size: 6, :pattern => '\d{6}' %>
-    </div>
-    <div>
-      <%= form.submit "Pay" %>
-    </div>
-  <% end %>
+  </div>
 </div>
