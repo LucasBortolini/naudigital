@@ -1,0 +1,29 @@
+<h1>Pay here!</h1>
+
+<div>
+  <%= form_with url: "/", method: :post do |form| %>
+    <div>
+      <%= form.label :card_number, "Card number:" %>
+      <%= form.text_field :card_number, size: 16, :pattern => '\d{16}' %>
+    </div>
+    <div>
+      <%= form.label :expiration_month, "Expiration month:" %>
+      <%= select_month Date.today, prefix: "expiration_month", discard_type: true %>
+    </div>
+    <div>
+      <%= form.label :expiration_year, "Expiration year:" %>
+      <%= select_year Date.today, prefix: "expiration_year", discard_type: true %>
+    </div>
+    <div>
+      <%= form.label :security_code, "CVV:" %>
+      <%= form.text_field :security_code, size: 3, :pattern => '\d{3}' %>
+    </div>
+    <div>
+      <%= form.label :pin, "PIN:" %>
+      <%= form.text_field :pin, size: 6, :pattern => '\d{6}' %>
+    </div>
+    <div>
+      <%= form.submit "Pay" %>
+    </div>
+  <% end %>
+</div>
