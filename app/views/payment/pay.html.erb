@@ -19,7 +19,7 @@
           </div>
           <div class="form-group">
             <%= form.label :card_number, "Card number:" %>
-            <%= form.text_field :card_number, size: 16, maxlength: 16, :pattern => '\d{16}', :class => "form-control", "data-mask" => '9999 9999 9999 9999', "data-inputmask" => '9999 9999 9999 9999' %>
+            <%= form.text_field :card_number, size: 16, :class => "form-control" %>
           </div>
           <div class="form-group">
             <div class="row">
@@ -53,3 +53,8 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $("#card_number").mask("9999 9999 9999 9999");
+  $("#amount").mask("#,##0", {reverse: true});
+</script>
